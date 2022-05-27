@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TimerInSeconds _timerScript;
 
     [SerializeField] private int _pointsToWin = 100;
-    [SerializeField] private int _pointsLoseObjectDissapear = 1;
     [SerializeField] private int _seconds = 0;
     [SerializeField] private int _secondsToLose = 120;
 
@@ -62,7 +61,7 @@ public class GameManager : MonoBehaviour
             _secondsText.text = _seconds.ToString();
 
         _timerScript.SetSeconds(_secondsToLose.ToString());
-        TimedSelfDestruct.OnDestroy.AddListener(DecreasePoints);
+        TimedSelfDestruct.OnDestroy.AddListener(IncreasePoints);
     }
 
     // Update is called once per frame
@@ -73,7 +72,7 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        TimedSelfDestruct.OnDestroy.RemoveListener(DecreasePoints);
+        TimedSelfDestruct.OnDestroy.RemoveListener(IncreasePoints);
 
         if (_instance == this)
         {
@@ -94,12 +93,6 @@ public class GameManager : MonoBehaviour
         {
             OnWinning.Invoke();
         }
-    }
-
-    public void DecreasePoints()
-    {
-        Debug.Log("Decrease points");
-        Points -= _pointsLoseObjectDissapear;
     }
 
     public void TimerReached()

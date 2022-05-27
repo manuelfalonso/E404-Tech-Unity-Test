@@ -128,6 +128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c00c815844b1894f913d00e3c7c6974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _clicksMade: 0
+  _clicksToDestroy: 1
+  _clickPoints: 1
 --- !u!114 &7799767409465660707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +144,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToDestruction: 5
-  OnDestroy:
-    m_PersistentCalls:
-      m_Calls: []
+  isOnDestroyEventEnable: 1
+  _notClickedPoints: -1

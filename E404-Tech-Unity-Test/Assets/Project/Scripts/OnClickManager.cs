@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OnClickEvent : MonoBehaviour
+public class OnClickManager : MonoBehaviour
 {
+    [SerializeField] private int _clicksMade = 0;
+    [SerializeField] private int _clicksToDestroy = 0;
+    [SerializeField] private int _clickPoints = 0;
+
     private TimedSelfDestruct _selfDestructScript;
 
     // Start is called before the first frame update
@@ -36,8 +40,12 @@ public class OnClickEvent : MonoBehaviour
         
         if (Input.GetMouseButtonDown(0))
         {
-            GameManager.Instance.IncreasePoints(1);
-            Destroy(gameObject);
+            _clicksMade++;
+            if (_clicksMade >= _clicksToDestroy)
+            {
+                GameManager.Instance.IncreasePoints(_clickPoints);
+                Destroy(gameObject);
+            }
         }
     }
 

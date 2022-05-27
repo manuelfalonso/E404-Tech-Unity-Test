@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// 3D Area Object Spawner with interval
@@ -12,7 +13,7 @@ public class ObjectCreatorArea3D : MonoBehaviour
 
 	[Tooltip("The object to spawn " +
 		"WARNING: take if from the Project panel, NOT the Scene/Hierarchy!")]
-	public GameObject prefabToSpawn;
+	public List<GameObject> prefabToSpawn;
 
 	[Header("Other options")]
 
@@ -35,7 +36,7 @@ public class ObjectCreatorArea3D : MonoBehaviour
 	/// <summary>
 	/// This will spawn an object, and then wait some time, then spawn another...
 	/// </summary>
-	private IEnumerator SpawnObject()
+	protected virtual IEnumerator SpawnObject()
 	{
 		while (true)
 		{
@@ -47,8 +48,10 @@ public class ObjectCreatorArea3D : MonoBehaviour
 			float randomZ = Random.Range(
 				-_boxCollider.size.z, _boxCollider.size.z) * .5f;
 
+			// Select one prefab from the list
+			var nextPrefab = prefabToSpawn[Random.Range(0, prefabToSpawn.Count - 1)];
 			// Generate the new object
-			GameObject newObject = Instantiate(prefabToSpawn);
+			GameObject newObject = Instantiate(nextPrefab);
 			newObject.transform.position = new Vector3(
 				randomX + transform.position.x,
 				randomY + transform.position.y,
