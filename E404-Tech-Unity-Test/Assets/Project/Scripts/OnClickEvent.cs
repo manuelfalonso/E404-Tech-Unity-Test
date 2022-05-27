@@ -19,8 +19,11 @@ public class OnClickEvent : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameManager.Instance.OnLosing.RemoveListener(DeactivateScript);
-        GameManager.Instance.OnWinning.RemoveListener(DeactivateScript);
+        if (GameManager.Instance)
+        {
+            GameManager.Instance.OnLosing.RemoveListener(DeactivateScript);
+            GameManager.Instance.OnWinning.RemoveListener(DeactivateScript);
+        }
     }
 
     private void OnMouseOver()

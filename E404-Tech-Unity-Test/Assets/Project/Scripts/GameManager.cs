@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public UnityEvent OnWinning;
     public UnityEvent OnLosing;
 
+    [SerializeField] private TimerInSeconds _timerScript;
+
     [SerializeField] private int _points = 0;
     [SerializeField] private int _pointsToWin = 100;
     [SerializeField] private int _seconds = 0;
@@ -44,6 +46,8 @@ public class GameManager : MonoBehaviour
             _pointsText.text = _points.ToString();
         if (_secondsText)
             _secondsText.text = _seconds.ToString();
+
+        _timerScript.SetSeconds(_secondsToLose.ToString());
     }
 
     // Update is called once per frame
@@ -73,5 +77,10 @@ public class GameManager : MonoBehaviour
         {
             OnWinning.Invoke();
         }
+    }
+
+    public void TimerReached()
+    {
+        OnLosing.Invoke();
     }
 }
