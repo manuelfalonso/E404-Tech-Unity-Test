@@ -18,6 +18,7 @@ public class ObjectCreatorArea3D : MonoBehaviour
 
 	[Tooltip("Configure the spawning pattern")]
 	public float spawnInterval = 1f;
+	public bool spawnOnStart = true;
 
 	private BoxCollider _boxCollider;
 
@@ -26,6 +27,9 @@ public class ObjectCreatorArea3D : MonoBehaviour
 		_boxCollider = GetComponent<BoxCollider>();
 		// Make the collider not affect physics
 		_boxCollider.isTrigger = true;
+
+		if (spawnOnStart)
+			StartSpawningObjects();
 	}
 
 	/// <summary>
@@ -58,7 +62,7 @@ public class ObjectCreatorArea3D : MonoBehaviour
 	/// <summary>
 	/// Start spawning objects with the time interval set
 	/// </summary>
-	public void StartSpawningObject()
+	public void StartSpawningObjects()
     {
 		StartCoroutine(SpawnObject());
 	}

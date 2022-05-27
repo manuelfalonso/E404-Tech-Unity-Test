@@ -133,7 +133,7 @@ PrefabInstance:
     - target: {fileID: 8342691525240876052, guid: be4daf9979c55554e826cc9f2212275f,
         type: 3}
       propertyPath: m_Name
-      value: Text (TMP)
+      value: Win
       objectReference: {fileID: 0}
     - target: {fileID: 8342691525240876052, guid: be4daf9979c55554e826cc9f2212275f,
         type: 3}
@@ -285,6 +285,12 @@ PrefabInstance:
 --- !u!224 &39175219 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8342691525240876053, guid: be4daf9979c55554e826cc9f2212275f,
+    type: 3}
+  m_PrefabInstance: {fileID: 39175218}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &39175220 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8342691525240876052, guid: be4daf9979c55554e826cc9f2212275f,
     type: 3}
   m_PrefabInstance: {fileID: 39175218}
   m_PrefabAsset: {fileID: 0}
@@ -792,7 +798,7 @@ PrefabInstance:
     - target: {fileID: 8342691525240876052, guid: be4daf9979c55554e826cc9f2212275f,
         type: 3}
       propertyPath: m_Name
-      value: Text (TMP)_1
+      value: Lose
       objectReference: {fileID: 0}
     - target: {fileID: 8342691525240876052, guid: be4daf9979c55554e826cc9f2212275f,
         type: 3}
@@ -947,6 +953,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1537941782}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1537941784 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8342691525240876052, guid: be4daf9979c55554e826cc9f2212275f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1537941782}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1547570467
 GameObject:
   m_ObjectHideFlags: 0
@@ -976,8 +988,86 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a7141726cd14046bd217e47a7b9a8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnWinning:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 848303911}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 39175220}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 9118044192917376610}
+        m_TargetAssemblyTypeName: ObjectCreatorArea3D, Assembly-CSharp
+        m_MethodName: StopSpawningObjects
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnLosing:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 848303911}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1537941784}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 9118044192917376610}
+        m_TargetAssemblyTypeName: ObjectCreatorArea3D, Assembly-CSharp
+        m_MethodName: StopSpawningObjects
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   _points: 0
-  _pointsToWin: 100
+  _pointsToWin: 10
   _seconds: 0
   _secondsToLose: 120
   _pointsText: {fileID: 496533770}
@@ -1622,3 +1712,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 9118044192917376608}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9118044192917376610 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5949595163083818989, guid: adc96731eef28c144bcafd2423b55c61,
+    type: 3}
+  m_PrefabInstance: {fileID: 9118044192917376608}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc9649c0ddf9b1446acf242869bb39a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
