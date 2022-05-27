@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class OnClickEvent : MonoBehaviour
 {
+    private TimedSelfDestruct _selfDestructScript;
+
     // Start is called before the first frame update
     void Start()
     {
+        _selfDestructScript = GetComponent<TimedSelfDestruct>();
         GameManager.Instance.OnLosing.AddListener(DeactivateScript);
         GameManager.Instance.OnWinning.AddListener(DeactivateScript);
     }
@@ -34,6 +37,7 @@ public class OnClickEvent : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             GameManager.Instance.IncreasePoints(1);
+            Destroy(gameObject);
         }
     }
 

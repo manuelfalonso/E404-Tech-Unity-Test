@@ -1285,6 +1285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a7141726cd14046bd217e47a7b9a8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _points: 2
   OnWinning:
     m_PersistentCalls:
       m_Calls:
@@ -1388,8 +1389,8 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   _timerScript: {fileID: 1742809992}
-  _points: 0
   _pointsToWin: 100
+  _pointsLoseObjectDissapear: 1
   _seconds: 0
   _secondsToLose: 120
   _pointsText: {fileID: 496533770}

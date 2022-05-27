@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Events;
@@ -13,13 +11,29 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } }
 
+    [SerializeField] private int _points = 0;
+    public int Points
+    {
+        get { return _points; }
+        private set
+        {
+            _points = value;
+            if (_points < 0)
+                _points = 0;
+
+            // Update UI
+            if (_pointsText)
+                _pointsText.text = _points.ToString();
+        } 
+    }
+
     public UnityEvent OnWinning;
     public UnityEvent OnLosing;
 
     [SerializeField] private TimerInSeconds _timerScript;
 
-    [SerializeField] private int _points = 0;
     [SerializeField] private int _pointsToWin = 100;
+    [SerializeField] private int _pointsLoseObjectDissapear = 1;
     [SerializeField] private int _seconds = 0;
     [SerializeField] private int _secondsToLose = 120;
 
@@ -43,11 +57,12 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         if (_pointsText)
-            _pointsText.text = _points.ToString();
+            _pointsText.text = Points.ToString();
         if (_secondsText)
             _secondsText.text = _seconds.ToString();
 
         _timerScript.SetSeconds(_secondsToLose.ToString());
+        TimedSelfDestruct.OnDestroy.AddListener(DecreasePoints);
     }
 
     // Update is called once per frame
@@ -58,6 +73,8 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        TimedSelfDestruct.OnDestroy.RemoveListener(DecreasePoints);
+
         if (_instance == this)
         {
             _instance = null;
@@ -66,17 +83,23 @@ public class GameManager : MonoBehaviour
 
     public void IncreasePoints(int pointsToIncrease)
     {
-        Debug.Log("Click");
-        _points += pointsToIncrease;
+        //Debug.Log("Clicked");
+        Points += pointsToIncrease;
 
         // Update UI
         if (_pointsText)
             _pointsText.text = _points.ToString();
 
-        if (_points >= _pointsToWin)
+        if (Points >= _pointsToWin)
         {
             OnWinning.Invoke();
         }
+    }
+
+    public void DecreasePoints()
+    {
+        Debug.Log("Decrease points");
+        Points -= _pointsLoseObjectDissapear;
     }
 
     public void TimerReached()

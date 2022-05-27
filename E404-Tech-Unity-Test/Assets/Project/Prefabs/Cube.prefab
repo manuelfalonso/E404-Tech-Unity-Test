@@ -141,3 +141,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToDestruction: 5
+  OnDestroy:
+    m_PersistentCalls:
+      m_Calls: []
