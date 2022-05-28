@@ -18,10 +18,12 @@ public class TimedSelfDestruct : MonoBehaviour
 	[Tooltip("Enable/Disable OnDestroy Event")]
 	public bool isOnDestroyEventEnable = true;
 
-	[SerializeField] private int _notClickedPoints;
+	private ItemClickManager _clickManagerScript;
 
 	void Start()
 	{
+		_clickManagerScript = GetComponent<ItemClickManager>();
+
 		Invoke("DestroyMe", timeToDestruction);
 	}
 
@@ -29,7 +31,7 @@ public class TimedSelfDestruct : MonoBehaviour
 	void DestroyMe()
 	{
         if (OnDestroy != null && isOnDestroyEventEnable)
-			OnDestroy.Invoke(_notClickedPoints);
+			OnDestroy.Invoke(_clickManagerScript._itemInfo._pointsNoClick);
 
 		Destroy(gameObject);
 	}

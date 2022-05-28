@@ -23,6 +23,10 @@ public class ObjectCreatorArea3D : MonoBehaviour
 
 	private BoxCollider _boxCollider;
 
+	private bool _isSpawnStreak = false;
+	private int _spawnStreakQuantity = 0;
+	private GameObject _spawnStreakPrefab = null;
+
 	void Start()
 	{
 		_boxCollider = GetComponent<BoxCollider>();
@@ -33,39 +37,80 @@ public class ObjectCreatorArea3D : MonoBehaviour
 			StartSpawningObjects();
 	}
 
+    private void OnEnable()
+    {
+        ItemClickManager.testAction += ItemSpawnStreakHandler;
+	}
+
+	private void OnDisable()
+    {
+		ItemClickManager.testAction -= ItemSpawnStreakHandler;
+	}
+
 	/// <summary>
 	/// This will spawn an object, and then wait some time, then spawn another...
 	/// </summary>
-	protected virtual IEnumerator SpawnObject()
+	private IEnumerator SpawnObject()
 	{
 		while (true)
 		{
-			// Create some random numbers
-			float randomX = Random.Range(
-				-_boxCollider.size.x, _boxCollider.size.x) * .5f;
-			float randomY = Random.Range(
-				-_boxCollider.size.y, _boxCollider.size.y) * .5f;
-			float randomZ = Random.Range(
-				-_boxCollider.size.z, _boxCollider.size.z) * .5f;
+			// If there is a spawn streak, spawn the spawn streak Prefab
+            if (_isSpawnStreak)
+            {
+				_spawnStreakQuantity--;
 
-			// Select one prefab from the list
-			var nextPrefab = prefabToSpawn[Random.Range(0, prefabToSpawn.Count - 1)];
-			// Generate the new object
-			GameObject newObject = Instantiate(nextPrefab);
-			newObject.transform.position = new Vector3(
-				randomX + transform.position.x,
-				randomY + transform.position.y,
-				randomZ + transform.position.z);
+                if (_spawnStreakQuantity >= 0)
+					Spawn(_spawnStreakPrefab);
+                else
+					_isSpawnStreak = false;
+            }
+			// If not select a random object from the List of Prefabs
+            else
+            {
+				// Select one prefab from the list
+				var nextPrefab = prefabToSpawn[Random.Range(0, prefabToSpawn.Count - 1)];
+				// Spawn next Prefab
+				Spawn(nextPrefab);
+            }
 
 			// Wait for some time before spawning another object
 			yield return new WaitForSeconds(spawnInterval);
 		}
 	}
 
-	/// <summary>
-	/// Start spawning objects with the time interval set
-	/// </summary>
-	public void StartSpawningObjects()
+    private void Spawn(GameObject prefabToSpawn)
+    {
+		// Create some random numbers
+		float randomX = Random.Range(
+			-_boxCollider.size.x, _boxCollider.size.x) * .5f;
+		float randomY = Random.Range(
+			-_boxCollider.size.y, _boxCollider.size.y) * .5f;
+		float randomZ = Random.Range(
+			-_boxCollider.size.z, _boxCollider.size.z) * .5f;
+
+		// Generate the new object
+		GameObject newObject = Instantiate(prefabToSpawn);
+		newObject.transform.position = new Vector3(
+			randomX + transform.position.x,
+			randomY + transform.position.y,
+			randomZ + transform.position.z);
+    }
+
+	private void ItemSpawnStreakHandler(SpawnItemInfo itemInfo)
+    {
+		// If it has spawn streak update local variables to make the Spawn Streak
+		if (itemInfo._hasSpawnStreak)
+		{
+			_isSpawnStreak = true;
+			_spawnStreakQuantity = itemInfo._streakQuantity;
+			_spawnStreakPrefab = itemInfo._prefabStreak;
+		}
+	}
+
+    /// <summary>
+    /// Start spawning objects with the time interval set
+    /// </summary>
+    public void StartSpawningObjects()
     {
 		StartCoroutine(SpawnObject());
 	}

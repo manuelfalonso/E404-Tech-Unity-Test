@@ -1,19 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class OnClickManager : MonoBehaviour
+/// <summary>
+/// 
+/// </summary>
+public class ItemClickManager : MonoBehaviour
 {
-    [SerializeField] private int _clicksMade = 0;
-    [SerializeField] private int _clicksToDestroy = 0;
-    [SerializeField] private int _clickPoints = 0;
+    public static event Action<SpawnItemInfo> testAction;
+    
+    public SpawnItemInfo _itemInfo;
 
-    private TimedSelfDestruct _selfDestructScript;
+    private int _clicksMade = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        _selfDestructScript = GetComponent<TimedSelfDestruct>();
         GameManager.Instance.OnLosing.AddListener(DeactivateScript);
         GameManager.Instance.OnWinning.AddListener(DeactivateScript);
     }
@@ -41,9 +43,12 @@ public class OnClickManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             _clicksMade++;
-            if (_clicksMade >= _clicksToDestroy)
+            if (_clicksMade >= _itemInfo._clicksToPoints)
             {
-                GameManager.Instance.IncreasePoints(_clickPoints);
+                if (_itemInfo._hasSpawnStreak)
+                    testAction?.Invoke(_itemInfo);
+
+                GameManager.Instance.IncreasePoints(_itemInfo._pointsOnClick);
                 Destroy(gameObject);
             }
         }

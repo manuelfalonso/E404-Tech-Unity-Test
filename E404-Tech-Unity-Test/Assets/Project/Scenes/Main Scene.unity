@@ -1285,7 +1285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a7141726cd14046bd217e47a7b9a8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _points: 2
+  _points: 0
   OnWinning:
     m_PersistentCalls:
       m_Calls:
@@ -2294,13 +2294,43 @@ PrefabInstance:
     - target: {fileID: 5949595163083818989, guid: adc96731eef28c144bcafd2423b55c61,
         type: 3}
       propertyPath: prefabToSpawn.Array.size
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5949595163083818989, guid: adc96731eef28c144bcafd2423b55c61,
         type: 3}
       propertyPath: prefabToSpawn.Array.data[0]
       value: 
-      objectReference: {fileID: 62809053983873722, guid: 9ff702fc15dd37742a05152d8ad901b6,
+      objectReference: {fileID: 1303993987982885212, guid: 5f53ab4249ca2684eb2c174dc8166a22,
+        type: 3}
+    - target: {fileID: 5949595163083818989, guid: adc96731eef28c144bcafd2423b55c61,
+        type: 3}
+      propertyPath: prefabToSpawn.Array.data[1]
+      value: 
+      objectReference: {fileID: 4845237255706968156, guid: b1bbe592cfc7e2f44a289967e9d774df,
+        type: 3}
+    - target: {fileID: 5949595163083818989, guid: adc96731eef28c144bcafd2423b55c61,
+        type: 3}
+      propertyPath: prefabToSpawn.Array.data[2]
+      value: 
+      objectReference: {fileID: 5904605578234560656, guid: 792a088ce5ee7d54797aa15378cd569d,
+        type: 3}
+    - target: {fileID: 5949595163083818989, guid: adc96731eef28c144bcafd2423b55c61,
+        type: 3}
+      propertyPath: prefabToSpawn.Array.data[3]
+      value: 
+      objectReference: {fileID: 1531614851703225416, guid: 2e3f96cb8e1fcd142a4fc2c347c31ab6,
+        type: 3}
+    - target: {fileID: 5949595163083818989, guid: adc96731eef28c144bcafd2423b55c61,
+        type: 3}
+      propertyPath: prefabToSpawn.Array.data[4]
+      value: 
+      objectReference: {fileID: 8899757106098142261, guid: e8bb010be274fc54c993c4cf410d2007,
+        type: 3}
+    - target: {fileID: 5949595163083818989, guid: adc96731eef28c144bcafd2423b55c61,
+        type: 3}
+      propertyPath: prefabToSpawn.Array.data[5]
+      value: 
+      objectReference: {fileID: 7372094321038749658, guid: 3c7ee80c7f87ae044b13f23d179e5de5,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adc96731eef28c144bcafd2423b55c61, type: 3}
