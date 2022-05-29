@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -2077660989885414870}
   - component: {fileID: 4262323492473362551}
   - component: {fileID: 8214824344028160653}
+  - component: {fileID: -1225328493650844262}
   m_Layer: 0
   m_Name: Yellow Block
   m_TagString: Untagged
@@ -32,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 7372094321038749658}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -240,3 +241,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToDestruction: 5
   isOnDestroyEventEnable: 1
+--- !u!114 &-1225328493650844262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7372094321038749658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b2330813e8ae644b909913312da4be9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _degreesToRotate: {x: 1, y: 1, z: 1}
