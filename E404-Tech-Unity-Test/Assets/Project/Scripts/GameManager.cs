@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.Events;
+using System;
 
 /// <summary>
 /// 
@@ -39,6 +40,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _pointsText;
     [SerializeField] private TextMeshProUGUI _secondsText;
     [SerializeField] private ObjectCreatorArea3D _spawner;
+    [SerializeField] private GameObject _pauseMenu;
+
+    private bool _isPlaying;
 
     private void Awake()
     {
@@ -68,7 +72,23 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        CheckPauseMenu();
+    }
+
+    private void CheckPauseMenu()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && _isPlaying)
+        {
+            _pauseMenu.SetActive(!_pauseMenu.activeSelf);
+            if (_pauseMenu.activeSelf)
+            {
+                Time.timeScale = 0;
+            }
+            else
+            {
+                Time.timeScale = 1;
+            }
+        }
     }
 
     private void OnDestroy()
@@ -104,5 +124,10 @@ public class GameManager : MonoBehaviour
     public void SetDifficulty(DifficultySO difficulty)
     {
         _spawner.difficulty = difficulty;
+    }
+
+    public void SetIsPlaying(bool isPlaying)
+    {
+        _isPlaying = isPlaying;
     }
 }
