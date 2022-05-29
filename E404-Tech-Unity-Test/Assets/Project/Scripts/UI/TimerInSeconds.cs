@@ -20,8 +20,23 @@ public class TimerInSeconds : MonoBehaviour
             if (value < 0)
                 value = 0;
 
+            var time = TimeSpan.FromSeconds(value);
+
             if (_secondsInput)
-                _secondsInput.text = value.ToString();
+            {
+                if (time.Seconds < 10)
+                    _secondsInput.text = "0" + time.Seconds.ToString();
+                else
+                    _secondsInput.text = time.Seconds.ToString();
+            }
+
+            if (_minutesInput)
+            {
+                if (time.Minutes < 10)
+                    _minutesInput.text = "0" + time.Minutes.ToString();
+                else
+                    _minutesInput.text = time.Minutes.ToString();
+            }
 
             _seconds = value;
         }
