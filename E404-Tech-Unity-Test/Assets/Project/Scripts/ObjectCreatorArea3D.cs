@@ -21,13 +21,15 @@ public class ObjectCreatorArea3D : MonoBehaviour
 	[Tooltip("Configure the spawning pattern")]
 	public bool spawnOnStart = true;
 
-	private BoxCollider _boxCollider;
-
 	private bool _isSpawnStreak = false;
 	private int _spawnStreakQuantity = 0;
+
+	private BoxCollider _boxCollider;
 	private GameObject _spawnStreakPrefab = null;
 
-	void Start()
+    #region Unity Events
+
+    void Start()
 	{
 		_boxCollider = GetComponent<BoxCollider>();
 		// Make the collider not affect physics
@@ -39,18 +41,22 @@ public class ObjectCreatorArea3D : MonoBehaviour
 
     private void OnEnable()
     {
-        ItemClickManager.testAction += ItemSpawnStreakHandler;
+        ItemClickManager.OnStreakSpawn += ItemSpawnStreakHandler;
 	}
 
 	private void OnDisable()
     {
-		ItemClickManager.testAction -= ItemSpawnStreakHandler;
+		ItemClickManager.OnStreakSpawn -= ItemSpawnStreakHandler;
 	}
 
-	/// <summary>
-	/// This will spawn an object, and then wait some time, then spawn another...
-	/// </summary>
-	private IEnumerator SpawnObject()
+    #endregion
+
+    #region Private Methods
+
+    /// <summary>
+    /// This will spawn an object, and then wait some time, then spawn another...
+    /// </summary>
+    private IEnumerator SpawnObject()
 	{
 		while (true)
 		{
@@ -86,6 +92,10 @@ public class ObjectCreatorArea3D : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Spawn the prefab in a random position inside the Box Collider
+	/// </summary>
+	/// <param name="prefabToSpawn">Prefab to Spawn</param>
     private void Spawn(GameObject prefabToSpawn)
     {
 		// Create some random numbers
@@ -104,6 +114,10 @@ public class ObjectCreatorArea3D : MonoBehaviour
 			randomZ + transform.position.z);
     }
 
+	/// <summary>
+	/// Choose the Prefab from a list based on their probabilities chances
+	/// </summary>
+	/// <returns></returns>
 	private GameObject RandomPrefabBaseOnDifficultyChances()
 	{
 		GameObject prefabToReturn = null;
@@ -141,6 +155,10 @@ public class ObjectCreatorArea3D : MonoBehaviour
 		}
 	}
 
+    #endregion
+
+    #region Public Methods
+
     /// <summary>
     /// Start spawning objects with the time interval set
     /// </summary>
@@ -156,4 +174,6 @@ public class ObjectCreatorArea3D : MonoBehaviour
     {
 		StopAllCoroutines();
     }
+
+    #endregion
 }

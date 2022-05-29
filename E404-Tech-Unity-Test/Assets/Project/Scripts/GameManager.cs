@@ -1,10 +1,9 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.Events;
-using System;
 
 /// <summary>
-/// 
+/// Singleton Game Manager script wich manges game states, 
 /// </summary>
 public class GameManager : MonoBehaviour
 {
@@ -44,6 +43,8 @@ public class GameManager : MonoBehaviour
 
     private bool _isPlaying;
 
+    #region Unity Events
+
     private void Awake()
     {
         if (_instance)
@@ -75,6 +76,20 @@ public class GameManager : MonoBehaviour
         CheckPauseMenu();
     }
 
+    private void OnDestroy()
+    {
+        TimedSelfDestruct.OnDestroy.RemoveListener(IncreasePoints);
+
+        if (_instance == this)
+        {
+            _instance = null;
+        }
+    }
+
+    #endregion
+
+    #region Private Methods
+
     private void CheckPauseMenu()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && _isPlaying)
@@ -91,15 +106,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        TimedSelfDestruct.OnDestroy.RemoveListener(IncreasePoints);
+    #endregion
 
-        if (_instance == this)
-        {
-            _instance = null;
-        }
-    }
+    #region Public Methods
 
     public void IncreasePoints(int pointsToIncrease)
     {
@@ -130,4 +139,6 @@ public class GameManager : MonoBehaviour
     {
         _isPlaying = isPlaying;
     }
+
+    #endregion
 }

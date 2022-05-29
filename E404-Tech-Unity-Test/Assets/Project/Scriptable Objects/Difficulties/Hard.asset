@@ -34,5 +34,5 @@ MonoBehaviour:
     chances: 40
   minimumTimeBetweenSpawns: 1
   maximumTimeBetweenSpawns: 2
-  minimumObjectAtSameSpawns: 3
-  maximumObjectAtSameSpawns: 4
+  minimumObjectAtSameSpawns: 4
+  maximumObjectAtSameSpawns: 5

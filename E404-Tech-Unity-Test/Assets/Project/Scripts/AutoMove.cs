@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Constant movement the direction selected.
+/// Constant movement in the direction defined.
 /// </summary>
 public class AutoMove : MonoBehaviour
 {

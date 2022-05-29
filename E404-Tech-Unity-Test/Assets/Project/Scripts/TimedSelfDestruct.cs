@@ -13,7 +13,8 @@ public class TimedSelfDestruct : MonoBehaviour
 {
 	[Tooltip("After this time, the object will be destroyed")]
 	public float timeToDestruction;
-	[Tooltip("Unity Event invoked when the gameobject is destroyed")]
+	[Tooltip("Unity Event invoked when the gameobject is destroyed." 
+		+ "It sends the points to lose")]
 	public static IntUnityEvent OnDestroy = new IntUnityEvent();
 	[Tooltip("Enable/Disable OnDestroy Event")]
 	public bool isOnDestroyEventEnable = true;

@@ -1,13 +1,12 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 /// <summary>
-/// 
+/// This script manage the gameplay of clicked items
 /// </summary>
 public class ItemClickManager : MonoBehaviour
 {
-    public static event Action<SpawnItemInfo> testAction;
+    public static event Action<SpawnItemInfo> OnStreakSpawn;
     
     public SpawnItemInfo _itemInfo;
 
@@ -18,12 +17,6 @@ public class ItemClickManager : MonoBehaviour
     {
         GameManager.Instance.OnLosing.AddListener(DeactivateScript);
         GameManager.Instance.OnWinning.AddListener(DeactivateScript);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnDestroy()
@@ -39,14 +32,22 @@ public class ItemClickManager : MonoBehaviour
     {
         if (!enabled)
             return;
-        
+
+        HandleMouseClick();
+    }
+
+    /// <summary>
+    /// Check clicks, count them, check streak spawn, play sound and destroy object
+    /// </summary>
+    private void HandleMouseClick()
+    {
         if (Input.GetMouseButtonDown(0))
         {
             _clicksMade++;
             if (_clicksMade >= _itemInfo._clicksToPoints)
             {
                 if (_itemInfo._hasSpawnStreak)
-                    testAction?.Invoke(_itemInfo);
+                    OnStreakSpawn?.Invoke(_itemInfo);
 
                 AudioSource.PlayClipAtPoint(_itemInfo.ClickSound, transform.position);
 
@@ -59,6 +60,6 @@ public class ItemClickManager : MonoBehaviour
     // Call OnLosing or OnWinning event
     private void DeactivateScript()
     {
-        this.enabled = false;
+        enabled = false;
     }
 }
