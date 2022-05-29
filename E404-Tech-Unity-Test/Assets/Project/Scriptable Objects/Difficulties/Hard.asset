@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7c7c3b6896cc44b92982321ea8c6fc, type: 3}
+  m_Name: Hard
+  m_EditorClassIdentifier: 
+  name: Hard
+  spawnChances:
+  - prefab: {fileID: 1303993987982885212, guid: 5f53ab4249ca2684eb2c174dc8166a22,
+      type: 3}
+    chances: 20
+  - prefab: {fileID: 4845237255706968156, guid: b1bbe592cfc7e2f44a289967e9d774df,
+      type: 3}
+    chances: 5
+  - prefab: {fileID: 5904605578234560656, guid: 792a088ce5ee7d54797aa15378cd569d,
+      type: 3}
+    chances: 20
+  - prefab: {fileID: 1531614851703225416, guid: 2e3f96cb8e1fcd142a4fc2c347c31ab6,
+      type: 3}
+    chances: 10
+  - prefab: {fileID: 8899757106098142261, guid: e8bb010be274fc54c993c4cf410d2007,
+      type: 3}
+    chances: 3
+  - prefab: {fileID: 7372094321038749658, guid: 3c7ee80c7f87ae044b13f23d179e5de5,
+      type: 3}
+    chances: 40
+  minimumTimeBetweenSpawns: 1
+  maximumTimeBetweenSpawns: 2
+  minimumObjectAtSameSpawns: 3
+  maximumObjectAtSameSpawns: 4

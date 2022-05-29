@@ -54,8 +54,6 @@ public class TimerInSeconds : MonoBehaviour
     {
         InitializeTime();
         InitializeInputFields();
-
-        StartTimer();
     }
 
     #endregion

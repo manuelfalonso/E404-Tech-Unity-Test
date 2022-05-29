@@ -14,11 +14,11 @@ public class ObjectCreatorArea3D : MonoBehaviour
 	[Tooltip("The object to spawn " +
 		"WARNING: take if from the Project panel, NOT the Scene/Hierarchy!")]
 	public List<GameObject> prefabToSpawn;
+	public DifficultySO difficulty;
 
 	[Header("Other options")]
 
 	[Tooltip("Configure the spawning pattern")]
-	public float spawnInterval = 1f;
 	public bool spawnOnStart = true;
 
 	private BoxCollider _boxCollider;
@@ -54,27 +54,35 @@ public class ObjectCreatorArea3D : MonoBehaviour
 	{
 		while (true)
 		{
-			// If there is a spawn streak, spawn the spawn streak Prefab
-            if (_isSpawnStreak)
-            {
-				_spawnStreakQuantity--;
+			// Random quantity to spawn
+			var spawnCount = Random.Range(difficulty.minimumObjectAtSameSpawns, difficulty.maximumObjectAtSameSpawns);
 
-                if (_spawnStreakQuantity >= 0)
-					Spawn(_spawnStreakPrefab);
-                else
-					_isSpawnStreak = false;
-            }
-			// If not select a random object from the List of Prefabs
-            else
-            {
-				// Select one prefab from the list
-				var nextPrefab = prefabToSpawn[Random.Range(0, prefabToSpawn.Count - 1)];
-				// Spawn next Prefab
-				Spawn(nextPrefab);
-            }
+			for (int i = 0; i < spawnCount; i++)
+			{
+				// If there is a spawn streak, spawn the spawn streak Prefab
+				if (_isSpawnStreak)
+				{
+					_spawnStreakQuantity--;
 
+					if (_spawnStreakQuantity >= 0)
+						Spawn(_spawnStreakPrefab);
+					else
+						_isSpawnStreak = false;
+				}
+				// If not select a random object from the List of Prefabs
+				else
+				{
+					// Select one prefab depending of difficult chances
+					var nextPrefab = RandomPrefabBaseOnDifficultyChances();
+					// Spawn next Prefab
+					Spawn(nextPrefab);
+				}
+			}
+
+			// Random time between spawns
+			var timeToNextSpawn = Random.Range(difficulty.minimumTimeBetweenSpawns, difficulty.maximumTimeBetweenSpawns);
 			// Wait for some time before spawning another object
-			yield return new WaitForSeconds(spawnInterval);
+			yield return new WaitForSeconds(timeToNextSpawn);
 		}
 	}
 
@@ -95,6 +103,40 @@ public class ObjectCreatorArea3D : MonoBehaviour
 			randomY + transform.position.y,
 			randomZ + transform.position.z);
     }
+
+	private GameObject RandomPrefabBaseOnDifficultyChances()
+	{
+		GameObject prefabToReturn = null;
+
+		var totalChances = 0;
+        foreach (var item in difficulty.spawnChances)
+        {
+			totalChances += item.chances;
+		}
+
+		var randomChances = Random.Range(0, totalChances);
+		var previousChances = 0;
+
+		Debug.Log("Length: " + difficulty.spawnChances.Length);
+		Debug.Log("randomChances: " + randomChances);
+
+		for (int i = 0; i < difficulty.spawnChances.Length; i++)
+        {
+			Debug.Log("previousChances: " + previousChances);
+
+            if (randomChances >= previousChances && randomChances <= (previousChances + difficulty.spawnChances[i].chances))
+            {
+				prefabToReturn = difficulty.spawnChances[i].prefab;
+				break;
+            }
+            else
+				previousChances += difficulty.spawnChances[i].chances;
+        }
+
+		Debug.Log("Prefab: " + prefabToReturn);
+
+		return prefabToReturn;
+	}
 
 	private void ItemSpawnStreakHandler(SpawnItemInfo itemInfo)
     {

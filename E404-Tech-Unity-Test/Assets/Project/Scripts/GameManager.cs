@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _pointsText;
     [SerializeField] private TextMeshProUGUI _secondsText;
+    [SerializeField] private ObjectCreatorArea3D _spawner;
 
     private void Awake()
     {
@@ -98,5 +99,10 @@ public class GameManager : MonoBehaviour
     public void TimerReached()
     {
         OnLosing.Invoke();
+    }
+
+    public void SetDifficulty(DifficultySO difficulty)
+    {
+        _spawner.difficulty = difficulty;
     }
 }
