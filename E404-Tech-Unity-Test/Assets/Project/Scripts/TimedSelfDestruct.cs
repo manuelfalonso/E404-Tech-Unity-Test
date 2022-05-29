@@ -33,6 +33,8 @@ public class TimedSelfDestruct : MonoBehaviour
         if (OnDestroy != null && isOnDestroyEventEnable)
 			OnDestroy.Invoke(_clickManagerScript._itemInfo._pointsNoClick);
 
+		AudioSource.PlayClipAtPoint(_clickManagerScript._itemInfo.DissapearSound, transform.position);
+
 		Destroy(gameObject);
 	}
 }

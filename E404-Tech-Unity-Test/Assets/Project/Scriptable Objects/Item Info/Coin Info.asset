@@ -16,6 +16,8 @@ MonoBehaviour:
   _clicksToPoints: 1
   _pointsOnClick: 5
   _pointsNoClick: -1
+  ClickSound: {fileID: 8300000, guid: 214f8f9c78fe46b4f89d07a122cd67d0, type: 3}
+  DissapearSound: {fileID: 8300000, guid: 825c1482cfe14be4d8703c42cf205ff4, type: 3}
   _hasSpawnStreak: 0
   _streakQuantity: 0
   _prefabStreak: {fileID: 0}

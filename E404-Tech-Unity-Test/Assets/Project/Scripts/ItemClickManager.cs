@@ -48,6 +48,8 @@ public class ItemClickManager : MonoBehaviour
                 if (_itemInfo._hasSpawnStreak)
                     testAction?.Invoke(_itemInfo);
 
+                AudioSource.PlayClipAtPoint(_itemInfo.ClickSound, transform.position);
+
                 GameManager.Instance.IncreasePoints(_itemInfo._pointsOnClick);
                 Destroy(gameObject);
             }

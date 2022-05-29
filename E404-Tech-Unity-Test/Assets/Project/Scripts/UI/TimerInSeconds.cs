@@ -9,6 +9,8 @@ using System;
 /// </summary>
 public class TimerInSeconds : MonoBehaviour
 {
+    public AudioClip clickSound;
+
     private float _seconds = 0;
     private bool _isRunning;
 

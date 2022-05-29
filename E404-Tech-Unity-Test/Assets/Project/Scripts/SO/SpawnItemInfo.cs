@@ -10,6 +10,8 @@ public class SpawnItemInfo : ScriptableObject
     public int _clicksToPoints = 1;
     public int _pointsOnClick = 0;
     public int _pointsNoClick = 0;
+    public AudioClip ClickSound;
+    public AudioClip DissapearSound;
     public bool _hasSpawnStreak = false;
     public int _streakQuantity = 0;
     public GameObject _prefabStreak;

@@ -117,13 +117,8 @@ public class ObjectCreatorArea3D : MonoBehaviour
 		var randomChances = Random.Range(0, totalChances);
 		var previousChances = 0;
 
-		Debug.Log("Length: " + difficulty.spawnChances.Length);
-		Debug.Log("randomChances: " + randomChances);
-
 		for (int i = 0; i < difficulty.spawnChances.Length; i++)
         {
-			Debug.Log("previousChances: " + previousChances);
-
             if (randomChances >= previousChances && randomChances <= (previousChances + difficulty.spawnChances[i].chances))
             {
 				prefabToReturn = difficulty.spawnChances[i].prefab;
@@ -132,9 +127,6 @@ public class ObjectCreatorArea3D : MonoBehaviour
             else
 				previousChances += difficulty.spawnChances[i].chances;
         }
-
-		Debug.Log("Prefab: " + prefabToReturn);
-
 		return prefabToReturn;
 	}
 
